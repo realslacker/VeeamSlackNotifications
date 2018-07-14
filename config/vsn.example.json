@@ -1,7 +1,0 @@
-{
-	"webhook": "https://hooks.slack.com/services/....",
-	"channel": "#veeam",
-	"service_name": "VeeamBot",
-	"icon_url": "https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/icon/veeam_slack.png",
-	"debug_log": false
-}
