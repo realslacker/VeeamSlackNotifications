@@ -136,7 +136,7 @@ $TeamsJSON = @{
 
 # Build the web request
 $Params = @{
-    Uri         = 'https://outlook.office.com/webhook/7aa7ff76-133a-4b14-a4fc-13002b3d78c8@3cad78c0-165a-40df-8a09-0e50742a2d1b/IncomingWebhook/e40125d29b1d4fdf906610c5bd94a1f8/4235b79f-88b5-4519-bb08-ac5d861c6b2f'
+    Uri         = $Config.WebhookURI
     Method      = 'Post'
     Headers     = @{'accept'='application/json'}
     Body        = $TeamsJSON | ConvertTo-Json -Depth 5
