@@ -1,0 +1,5 @@
+{
+	"WebhookURI"  : "https://outlook.office.com/webhook/...",
+	"DebugEnable" : false,
+	"DebugPath"   : ".\log\debug.log"
+}

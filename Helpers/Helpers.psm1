@@ -1,12 +1,12 @@
 # This function logs messages with a type tag
-function Write-LogMessage($tag, $message) {
-    Write-Host "[$tag] $message"
+function Write-LogMessage([string]$Tag, [string]$Message) {
+    Write-Host "[$Tag] $Message"
 }
 
 # This function handles Logging
-function Start-Logging($path) {
+function Start-Logging([string]$Path) {
     try {
-        Start-Transcript -path $path -force -append 
+        Start-Transcript -Path $Path -Force -Append 
         Write-LogMessage -Tag 'Info' -Message "Transcript is being logged to $path"
     } catch [Exception] {
         Write-LogMessage -Tag 'Info' -Message "Transcript is already being logged to $path"

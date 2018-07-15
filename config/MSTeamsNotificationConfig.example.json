@@ -1,5 +1,0 @@
-{
-	"webhook": "https://outlook.office.com/webhook/...",
-	"icon_url": "https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/icon/veeam_icon.png",
-	"debug_log": false
-}
