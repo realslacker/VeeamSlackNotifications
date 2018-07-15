@@ -1,51 +1,57 @@
-# Veeam Backup and Restore Notification for Slack
+# Veeam Backup and Restore Notification for Microsoft Teams
 
-Sends notifications from Veeam Backup & Restore to Slack
+Sends notifications from Veeam Backup & Restore to Microsoft Teams
 
-![Chat Example](https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/screens/sh-2.png)
+![Chat Example](https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/screens/TeamsCard.png)
 
 
-If you use Mattermost check this out:
-
-* [Veeam Mattermost Notifications](https://github.com/TheSageColleges/MattermostVeeamNotifications)
+This is a fork of [Veeam Slack Notifications](https://github.com/TheSageColleges/VeeamSlackNotifications) by [TheSageColleges](https://github.com/TheSageColleges).
 
 ---
 
 ## Setup
 
-Make a scripts directory: `C:\VeeamScripts`
+Make a scripts directory such as: `C:\Scripts`
 
 ```powershell
 # To make the directory run the following command in PowerShell
-New-Item C:\VeeamScripts PowerShell -type directory
+New-Item -Path C:\Scripts -Type Directory
 ```
 
-#### Get code
+#### Clone or Download
 
-Then clone this repository:
+To clone with Git:
 
-```shell
-cd C:\VeeamScripts
-git clone https://github.com/TheSageColleges/VeeamSlackNotifications.git
-cd VeeamSlackNotifications
-git checkout v1-stable
-```
-
-Or without git:
-
-Download release, there may be later releases take a look and replace the version number with newer release numbers.
-Unzip the archive and make sure the folder is called: `VeeamSlackNotifications`
 ```powershell
-Invoke-WebRequest -Uri https://github.com/TheSageColleges/VeeamSlackNotifications/archive/v1.0.zip -OutFile C:\VeeamScripts\VeeamSlackNotifications-v1.0.zip
+cd C:\Scripts
+git clone https://github.com/realslacker/VeeamTeamsNotifications.git
+```
+
+Without Git:
+
+Download the repo, then extract to `VeeamTeamsNotifications`.
+```powershell
+# GitHub requires TLS v1.2, so enable before downloading
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# Grab the file
+Invoke-WebRequest -Uri https://github.com/realslacker/VeeamTeamsNotifications/archive/master.zip -OutFile C:\Scripts\VeeamTeamsNotifications.zip
+# Unzip the archive
+Expand-Archive -Path C:\Scripts\VeeamTeamsNotifications.zip -DestinationPath C:\Scripts\
+# Rename the extracted folder
+Move-Item -Path C:\Scripts\VeeamTeamsNotifications-master C:\Scripts\VeeamTeamsNotifications
 ```
 
 Configure the project:
 
-```shell
-# Make a new config file
-cp C:\VeeamScripts\VeeamSlackNotifications\config\vsn.example.json C:\VeeamScripts\VeeamSlackNotifications\config\vsn.json
-# Edit your config file. You must replace the webhook field with your own slack url.
-notepad.exe C:\VeeamScripts\VeeamSlackNotifications\config\vsn.json
+```powershell
+# Copy the default configuration file
+Copy-Item -Path C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.example.json -Destination C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json
+# Enter your webhook URI
+$WebhookURI = Read-Host "Enter your fully qualified webhook URI"
+# Commit the URI to the config file
+$Config = Get-Content -Path "C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json" -Raw | ConvertFrom-Json
+$Config.WebhookURI = $WebhookURI
+$Config | ConvertTo-Json | Set-Content -Path "C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json"
 ```
 
 Finally open Veeam and configure your jobs. Edit them and click on the <img src="https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/screens/sh-3.png" height="20"> button.
