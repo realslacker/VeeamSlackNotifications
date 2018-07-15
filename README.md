@@ -2,7 +2,7 @@
 
 Sends notifications from Veeam Backup & Restore to Microsoft Teams
 
-![Chat Example](https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/screens/TeamsCard.png)
+![Chat Example](https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/screens/example-notification.png)
 
 
 This is a fork of [Veeam Slack Notifications](https://github.com/TheSageColleges/VeeamSlackNotifications) by [TheSageColleges](https://github.com/TheSageColleges).
@@ -54,15 +54,17 @@ $Config | ConvertTo-Json | Set-Content -Path "C:\Scripts\VeeamTeamsNotifications
 
 ```
 
-Finally open Veeam and configure your jobs. Edit them and click on the <img src="https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/screens/sh-3.png" height="20"> button.
+Finally open Veeam and configure your jobs. Edit each job, going to the storage section and clicking on the **Advanced** button.
+
+![Edit Job Screenshot](https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/screens/backup-storage-screen.png)
 
 Navigate to the "Scripts" tab and paste the following line the script that runs after the job is completed:
 
 ```shell
-Powershell.exe -File C:\Scripts\VeeamTeamsNotifications\Start-VeeamTeamsNotification.ps1
+powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\VeeamTeamsNotifications\Start-VeeamTeamsNotification.ps1
 ```
 
-![screen](https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/screens/sh-1.png)
+![Advanced Settings - Scripts Screenshot](https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/screens/backup-advanced-settings.png)
 
 ---
 
@@ -72,10 +74,8 @@ Below is an example configuration file.
 
 ```shell
 {
-	"webhook": "https://hooks.slack.com/services/....",
-	"channel": "#veeam",
-	"service_name": "VeeamBot",
-	"icon_url": "https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/icon/veeam_slack.png",
-	"debug_log": false
+	"WebhookURI"  : "https://outlook.office.com/webhook/...",
+	"DebugEnable" : false,
+	"DebugPath"   : "./log/debug.log"
 }
 ```
