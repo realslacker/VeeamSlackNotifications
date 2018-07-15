@@ -1,6 +1,13 @@
-Param(
-	[String]$BackupJobName,
-	[String]$Id
+[CmdletBinding()]
+param(
+	
+    [Parameter(Mandatory)]
+    [string]
+    $OrigJobName,
+
+	[Parameter(Mandatory)]
+    [string]
+    $Id
 )
 
 # Import Helper Functions
@@ -25,7 +32,7 @@ Add-PSSnapin VeeamPSSnapin
 
 # Get the Veeam session
 $Session = Get-VBRBackupSession |
-    Where-Object { ( $_.OrigJobName -eq $BackupJobName ) -and ( $Id -eq $_.Id ) }
+    Where-Object { $_.OrigJobName -eq $OrigJobName -and $_.Id -eq $Id }
 
 
 # Wait for the session to finish up
@@ -36,7 +43,7 @@ while ( -not $Session.IsCompleted ) {
 	Start-Sleep -Milliseconds 200
 
 	$Session = Get-VBRBackupSession |
-        Where-Object { ( $_.OrigJobName -eq $BackupJobName ) -and ( $Id -eq $_.Id ) }
+        Where-Object { $_.OrigJobName -eq $OrigJobName -and $_.Id -eq $Id }
 
 }
 

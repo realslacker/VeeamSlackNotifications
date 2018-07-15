@@ -35,10 +35,10 @@ $Session = Get-VBRBackupSession |
 # Start a new new script in a new process with some of the information gathered her
 # Doing this allows Veeam to finish the current session so information on the job's status can be read
 $Process = @{
-    FilePath     = 'powershell.exe'
-    ArgumentList = '-File', "$PSScriptRoot\Sent-VeeamTeamsNotification.ps1", '-Id', $Session.Id, '-BackupJobName', $Session.OrigJobName
-    Verb         = 'RunAs'
-    WindowStyle  = 'Hidden'
+    FilePath        = 'powershell.exe'
+    ArgumentList    = "-ExecutionPolicy ByPass -Command ""& '$PSScriptRoot\Send-VeeamTeamsNotification.ps1' -Id '$($Session.Id)' -OrigJobName '$($Session.OrigJobName)'"""
+    Verb            = 'RunAs'
+    WindowStyle     = 'Hidden'
 }
 
 Start-Process @Process
