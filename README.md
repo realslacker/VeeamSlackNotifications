@@ -4,7 +4,6 @@ Sends notifications from Veeam Backup & Restore to Microsoft Teams
 
 ![Chat Example](https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/screens/example-notification.png)
 
-
 This is a fork of [Veeam Slack Notifications](https://github.com/TheSageColleges/VeeamSlackNotifications) by [TheSageColleges](https://github.com/TheSageColleges).
 
 ---
@@ -18,16 +17,16 @@ Make a scripts directory such as: `C:\Scripts`
 New-Item -Path C:\Scripts -Type Directory
 ```
 
-#### Clone or Download
+### Clone or Download This Project
 
-To clone with Git:
+#### Clone With Git
 
 ```powershell
 cd C:\Scripts
 git clone https://github.com/realslacker/VeeamTeamsNotifications.git
 ```
 
-Without Git:
+#### Download Without Git
 
 Download the repo, then extract to `VeeamTeamsNotifications`.
 ```powershell
@@ -42,7 +41,7 @@ Move-Item -Path C:\Scripts\VeeamTeamsNotifications-master C:\Scripts\VeeamTeamsN
 
 ```
 
-Configure the project:
+### Configure
 
 ```powershell
 # Copy the default configuration file
@@ -68,7 +67,7 @@ powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\VeeamTeamsNotifications\
 
 ---
 
-## Example Configuration:
+## Example Configuration
 
 Below is an example configuration file.
 
