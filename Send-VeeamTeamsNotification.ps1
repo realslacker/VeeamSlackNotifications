@@ -1,14 +1,16 @@
 [CmdletBinding()]
 param(
-	
+
     [Parameter(Mandatory)]
     [string]
     $OrigJobName,
 
-	[Parameter(Mandatory)]
+    [Parameter(Mandatory)]
     [string]
     $Id
+    
 )
+
 
 # Import Helper Functions
 Import-Module "$PSScriptRoot\Helpers"
@@ -21,7 +23,7 @@ $Config = Get-Content -Path "$PSScriptRoot\config\VeeamTeamsNotificationConfig.j
 # Should we log?
 if( $Config.DebugEnable ) {
 
-	Start-Logging -Path $Config.DebugPath
+    Start-Logging -Path $Config.DebugPath
 
 }
 
@@ -38,11 +40,11 @@ $Session = Get-VBRBackupSession |
 # Wait for the session to finish up
 while ( -not $Session.IsCompleted ) {
 
-	Write-LogMessage 'Info' 'Session not finished Sleeping...'
+    Write-LogMessage 'Info' 'Session not finished Sleeping...'
 
-	Start-Sleep -Milliseconds 200
+    Start-Sleep -Milliseconds 200
 
-	$Session = Get-VBRBackupSession |
+    $Session = Get-VBRBackupSession |
         Where-Object { $_.OrigJobName -eq $OrigJobName -and $_.Id -eq $Id }
 
 }
@@ -78,37 +80,37 @@ $Transferred   = '{0} ({1:N1}x)' -f (Convert-BytesToHuman $Session.Progress.Tran
 switch ( $Session.Result ) {
 
     Success {
-    
-        $Title         = "Veeam backup job '{0}' completed successfully" -f $Session.OrigJobName
-        $Color         = '54B948'
-    
+
+        $Title          = "Veeam backup job '{0}' completed successfully" -f $Session.OrigJobName
+        $Color          = '54B948'
+
     }
 
     Warning {
-    
-        $Title         = "Veeam backup job '{0}' completed with warnings" -f $Session.OrigJobName
-        $Color         = 'F5BD4C'
-    
+
+        $Title          = "Veeam backup job '{0}' completed with warnings" -f $Session.OrigJobName
+        $Color          = 'F5BD4C'
+
     }
-    
+
     Failed  {
-    
-        $Title         = "Veeam backup job '{0}' has failed!" -f $Session.OrigJobName
-        $Color         = 'EF5D4A'
-    
+
+        $Title          = "Veeam backup job '{0}' has failed!" -f $Session.OrigJobName
+        $Color          = 'EF5D4A'
+
     }
 
     None    {
-    
-        $Title         = "Veeam backup job '{0}' completed" -f $Session.OrigJobName
-        $Color         = '54B948'
-    
+
+        $Title          = "Veeam backup job '{0}' completed" -f $Session.OrigJobName
+        $Color          = '54B948'
+
     }
-    
+
     default {
-    
-        $Title = "Veeam backup job '{0}' has other status" -f $Session.OrigJobName
-        $Color = '54B948'
+
+        $Title          = "Veeam backup job '{0}' has other status" -f $Session.OrigJobName
+        $Color          = '54B948'
 
     }
 

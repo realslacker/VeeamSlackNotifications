@@ -9,7 +9,7 @@ $Config = Get-Content -Path "$PSScriptRoot\config\VeeamTeamsNotificationConfig.j
 # Should we log?
 if( $Config.DebugEnable ) {
 
-	Start-Logging -Path $Config.DebugPath
+    Start-Logging -Path $Config.DebugPath
 
 }
 
