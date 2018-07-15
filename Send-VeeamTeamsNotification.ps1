@@ -42,10 +42,10 @@ while ( -not $Session.IsCompleted ) {
 
 
 # calculate success/warning/error counts
-$TotalObjects  = [int]$Session.Progress.TotalObjects
-$WarningCount  = [int]$Session.Warnings
-$FailureCount  = [int]$Session.Failures
-$SuccessCount  = $TotalObjects - $WarningCount - $FailureCount
+$TaskSessions  = $Session.GetTaskSessions()
+$SuccessCount  = ( $TaskSessions | Where-Object Status -eq 'Success' ).Count
+$WarningCount  = ( $TaskSessions | Where-Object Status -eq 'Warning' ).Count
+$FailureCount  = ( $TaskSessions | Where-Object Status -eq 'Failed'  ).Count
 
 
 # setup variables
