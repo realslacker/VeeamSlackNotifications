@@ -46,11 +46,9 @@ Configure the project:
 ```powershell
 # Copy the default configuration file
 Copy-Item -Path C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.example.json -Destination C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json
-# Enter your webhook URI
-$WebhookURI = Read-Host "Enter your fully qualified webhook URI"
-# Commit the URI to the config file
+# Configure the Webhook URI
 $Config = Get-Content -Path "C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json" -Raw | ConvertFrom-Json
-$Config.WebhookURI = $WebhookURI
+$Config.WebhookURI = Read-Host "Enter your fully qualified webhook URI"
 $Config | ConvertTo-Json | Set-Content -Path "C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json"
 ```
 
@@ -59,7 +57,7 @@ Finally open Veeam and configure your jobs. Edit them and click on the <img src=
 Navigate to the "Scripts" tab and paste the following line the script that runs after the job is completed:
 
 ```shell
-Powershell.exe -File C:\VeeamScripts\VeeamSlackNotifications\SlackNotificationBootstrap.ps1
+Powershell.exe -File C:\Scripts\VeeamTeamsNotifications\Start-VeeamTeamsNotification.ps1
 ```
 
 ![screen](https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/screens/sh-1.png)
