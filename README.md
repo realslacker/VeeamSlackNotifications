@@ -58,7 +58,7 @@ Finally open Veeam and configure your jobs. Edit each job, going to the storage 
 
 ![Edit Job Screenshot](https://raw.githubusercontent.com/realslacker/VeeamTeamsNotifications/master/asset/img/screens/backup-storage-screen.png)
 
-Navigate to the "Scripts" tab and paste the following line the script that runs after the job is completed:
+Navigate to the **Scripts** tab and paste the following line the script that runs after the job is completed:
 
 ```shell
 powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\VeeamTeamsNotifications\Start-VeeamTeamsNotification.ps1
