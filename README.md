@@ -39,6 +39,7 @@ Invoke-WebRequest -Uri https://github.com/realslacker/VeeamTeamsNotifications/ar
 Expand-Archive -Path C:\Scripts\VeeamTeamsNotifications.zip -DestinationPath C:\Scripts\
 # Rename the extracted folder
 Move-Item -Path C:\Scripts\VeeamTeamsNotifications-master C:\Scripts\VeeamTeamsNotifications
+
 ```
 
 Configure the project:
@@ -50,6 +51,7 @@ Copy-Item -Path C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotification
 $Config = Get-Content -Path "C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json" -Raw | ConvertFrom-Json
 $Config.WebhookURI = Read-Host "Enter your fully qualified webhook URI"
 $Config | ConvertTo-Json | Set-Content -Path "C:\Scripts\VeeamTeamsNotifications\config\VeeamTeamsNotificationConfig.json"
+
 ```
 
 Finally open Veeam and configure your jobs. Edit them and click on the <img src="https://raw.githubusercontent.com/TheSageColleges/VeeamSlackNotifications/master/asset/img/screens/sh-3.png" height="20"> button.
