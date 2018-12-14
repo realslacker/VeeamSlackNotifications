@@ -69,7 +69,12 @@ $FailureIcon   = '![Failure Image](https://raw.githubusercontent.com/realslacker
 
 $Duration      = Convert-TimeSpanToHuman $Session.Progress.Duration
 $Rate          = '{0}/s' -f (Convert-BytesToHuman $Session.Progress.AvgSpeed)
-$Bottleneck    = 'Anyone know where to find this?'
+$Bottleneck    = $Session.Info.Progress.BottleneckInfo.Bottleneck
+// Detailed bottleneck data
+//$BottleneckSource    = $Session.Info.Progress.BottleneckInfo.Source
+//$BottleneckProxy     = $Session.Info.Progress.BottleneckInfo.Proxy
+//$BottleneckNetwork   = $Session.Info.Progress.BottleneckInfo.Network
+//$BottleneckTarget    = $Session.Info.Progress.BottleneckInfo.Target
 
 $Processed     = '{0} ({1}%)' -f (Convert-BytesToHuman $Session.Progress.ProcessedUsedSize), $Session.Info.CompletionPercentage
 $Read          = Convert-BytesToHuman $Session.Progress.ReadSize
@@ -130,7 +135,7 @@ $TeamsJSON = @{
             'facts'= @(
                 @{ 'name' = 'Duration';         'value' = $Duration                                     }
                 @{ 'name' = 'Processing rate';  'value' = $Rate                                         }
-                #@{ 'name' = 'Bottleneck';       'value' = $Bottleneck                                   }
+                @{ 'name' = 'Bottleneck';       'value' = $Bottleneck                                   }
                 @{ 'name' = 'Data Processed';   'value' = $Processed                                    }
                 @{ 'name' = 'Data Read';        'value' = $Read                                         }
                 @{ 'name' = 'Data Transferred'; 'value' = $Transferred                                  }
